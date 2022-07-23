@@ -20,7 +20,7 @@ class AdminUser extends Model implements Authenticatable
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['name','email','password','avatar','status','oauth_id','ding_id'];
     /**
      * The attributes that should be cast to native types.
      *
@@ -28,6 +28,7 @@ class AdminUser extends Model implements Authenticatable
      */
     protected $casts = [];
 
-
+    const STATUS_YES=0; //正常
+    const STATUS_NO=1;  // 禁用
 
 }

@@ -23,7 +23,7 @@ class ValidationExceptionHandler extends ExceptionHandler
         /** @var \Hyperf\Validation\ValidationException $throwable */
         $body = $throwable->validator->errors()->first();
         if (! $response->hasHeader('content-type')) {
-            $response = $response->withAddedHeader('content-type', 'text/plain; charset=utf-8');
+            $response = $response->withAddedHeader('content-type', 'application/json');
         }
         return $response->withHeader('Server', 'Hyperf')->withStatus(200)->withBody(new SwooleStream(json_encode([
             'code' => ErrorCode::PARAM_ERROR ,

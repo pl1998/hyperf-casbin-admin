@@ -1,16 +1,18 @@
-#### 基于hyperf开发的后台框架。
+### 基于hyperf+casbin开发的通用管理后台。
 
 
-* casbin 权限控制:https://github.com/donjan-deng/hyperf-casbin
-* 官网文档:https://casbin.org/docs/zh-CN/overview
+#### 依赖
+* [casbin包](https://github.com/donjan-deng/hyperf-casbin)
+* [casbin 官网文档](ttps://casbin.org/docs/zh-CN/overview)
+* [hyperf-auth](https://github.com/qbhy/hyperf-auth)
 
-
-* 复制配置文件
+#### 复制配置文件并配置好mysql、redis信息
 ```shell
 cp .env.example .env
 ```
-* 数据迁移
+#### 执行初始化构建命令
 ```php
- php bin/hyperf.php gen:auth-env
-php bin/hyperf.php migrate
+php bin/hyperf.php admin:install
 ```
+
+

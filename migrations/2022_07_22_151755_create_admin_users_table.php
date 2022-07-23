@@ -14,11 +14,11 @@ class CreateAdminUsersTable extends Migration
         Schema::create('admin_users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name',50);
-            $table->string('email',50);
-            $table->timestamp('email_verified_at');
+            $table->string('email',50)->unique();
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('remember_token',100);
-            $table->string('avatar');
+            $table->string('remember_token',100)->nullable();
+            $table->string('avatar')->nullable();
             $table->tinyInteger('status')->default(0)->comment('0.正常.1禁用');
             $table->integer('ding_id')->default(0);
             $table->integer('oauth_id')->default(0);

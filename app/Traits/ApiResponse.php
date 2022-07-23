@@ -50,6 +50,13 @@ trait ApiResponse
         return $this->response->withAddedHeader('content-type', 'text/plain')->withBody(new SwooleStream((string)$response));
     }
 
+    /**
+     * 成功响应
+     * @param $data
+     * @param $message
+     * @param $code
+     * @return ResponseInterface
+     */
     public function success( $data=[], $message='Success', $code=200){
         return $this->respond([
             'code'=>$code,
@@ -59,11 +66,18 @@ trait ApiResponse
         ]);
     }
 
+    /**
+     * 异常返回
+     * @param $message
+     * @param $code
+     * @param $data
+     * @return ResponseInterface
+     */
     public function fail( $message='Error', $code=500,$data=[]){
         return $this->respond([
             'code'=>$code,
             'message'=>$message,
-            'data'=>$data ?? (object)[],
+            'data'=>(object)$data,
             'time'=>time()
         ]);
     }
