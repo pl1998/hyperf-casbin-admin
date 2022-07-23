@@ -11,8 +11,11 @@
 cp .env.example .env
 ```
 #### 执行初始化构建命令
+
 ```php
 php bin/hyperf.php admin:install
 ```
+
+#### 默认账号密码:`dmin@hyperf.com` `hyperfyyds`
 
 

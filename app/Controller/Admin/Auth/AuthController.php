@@ -47,7 +47,7 @@ class AuthController extends AbstractController
             $this->fail('密码错误！');
         }
 
-        $token = $this->auth->guard('admin')->login($users);
+        $token = $this->auth->defaultGuard()->login($users);
 
         return $this->success([
             'user_id'=>$users->id,
