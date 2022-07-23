@@ -50,17 +50,17 @@ class AuthController extends AbstractController
         $token = $this->auth->login($users);
 
         return $this->success([
-            'user_id'=>$users->id,
             'token'=>$token,
-            'refresh_ttl' => config('auth.refresh_ttl')
+            'refresh_ttl' => config('auth.guards.admin_jwt.refresh_ttl')
         ]);
 
     }
 
     public function me()
     {
-        $user = $this->auth->guard('admin')->user();
-        return $this->success([
+        $user = $this->auth->user();
+
+        return $this->success( [
             'user_id'=>$user->id,
             'avatar'=>$user->avatar,
             'name'=>$user->name,

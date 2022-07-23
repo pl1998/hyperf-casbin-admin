@@ -4,27 +4,27 @@ declare(strict_types=1);
 
 namespace App\Middleware;
 
-use Hyperf\HttpServer\Contract\RequestInterface;
+use Hyperf\Utils\Str;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Hyperf\HttpServer\Contract\RequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface as HttpResponse;
-use Hyperf\Di\Annotation\Inject;
 use App\Guard\AdminGuard;
 
 class AdminAuthMiddleware implements MiddlewareInterface
 {
 
+    use GetToken;
+
     /**
-     * @Inject
      * @var RequestInterface
      */
     protected $request;
 
     /**
-     * @Inject
      * @var HttpResponse
      */
     protected $response;
@@ -35,19 +35,21 @@ class AdminAuthMiddleware implements MiddlewareInterface
     protected $container;
 
     /**
-     * @Inject
      * @var AdminGuard
      */
     protected $auth;
 
-    public function __construct(ContainerInterface $container)
+    public function __construct(ContainerInterface $container,AdminGuard $adminGuard,HttpResponse $response,RequestInterface $request)
     {
         $this->container = $container;
+        $this->auth = $adminGuard;
+        $this->response = $response;
+        $this->request = $request;
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $token = $this->request->header('authorization',$this->request->input('token'));
+        $token = $this->getToken();
 
         if(!$token) {
             return $this->response->withStatus(401)->json([
@@ -56,7 +58,8 @@ class AdminAuthMiddleware implements MiddlewareInterface
                 'data'=>(object)[]
             ]);
         }
-        if(!$this->auth->guard('admin')->check($token)) {
+
+        if(!$this->auth->check($token)) {
             return $this->response->withStatus(401)->json([
                 'code'=>401,
                 'message'=>'token校验失败',

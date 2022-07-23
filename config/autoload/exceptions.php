@@ -14,8 +14,7 @@ return [
         'http' => [
             App\Exception\Handler\ValidationExceptionHandler::class,
             App\Exception\Handler\AppExceptionHandler::class,
-            \Qbhy\HyperfAuth\AuthExceptionHandler::class,
-            \Hyperf\Validation\ValidationExceptionHandler::class,
+            App\Exception\Handler\AuthExceptionHandler::class,
         ],
     ],
 ];
