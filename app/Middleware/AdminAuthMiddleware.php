@@ -12,7 +12,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface as HttpResponse;
 use Hyperf\Di\Annotation\Inject;
-use Qbhy\HyperfAuth\AuthManager;
+use App\Guard\AdminGuard;
 
 class AdminAuthMiddleware implements MiddlewareInterface
 {
@@ -36,7 +36,7 @@ class AdminAuthMiddleware implements MiddlewareInterface
 
     /**
      * @Inject
-     * @var AuthManager
+     * @var AdminGuard
      */
     protected $auth;
 

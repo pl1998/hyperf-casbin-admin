@@ -13,14 +13,14 @@ use App\Controller\AbstractController;
 use App\Model\AdminUser;
 use App\Request\AuthRequest;
 use HyperfExt\Hashing\Hash;
-use Qbhy\HyperfAuth\AuthManager;
+use App\Guard\AdminGuard;
 use Hyperf\Di\Annotation\Inject;
 
 class AuthController extends AbstractController
 {
     /**
      * @Inject
-     * @var AuthManager
+     * @var AdminGuard
      */
     protected $auth;
 
@@ -47,7 +47,7 @@ class AuthController extends AbstractController
             $this->fail('密码错误！');
         }
 
-        $token = $this->auth->defaultGuard()->login($users);
+        $token = $this->auth->login($users);
 
         return $this->success([
             'user_id'=>$users->id,

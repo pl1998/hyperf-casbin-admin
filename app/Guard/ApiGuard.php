@@ -12,8 +12,10 @@ use Qbhy\HyperfAuth\AuthManager;
 
 class ApiGuard extends AuthManager
 {
-    /**
-     * @var string
-     */
-    protected $defaultDriver = 'api';
+    protected $auth = 'api';
+
+    public function defaultGuard(): string
+    {
+        return $this->config[$this->auth]['guard'] ?? $this->defaultDriver;
+    }
 }
