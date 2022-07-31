@@ -43,7 +43,7 @@ class AdminInstall extends HyperfCommand
         // 数据库迁移
         $this->call('migrate');
 
-        // 生成jws相关信息
+        // 生成jwt相关信息
         $this->call('gen:auth-env');
 
         // 创建一个登录用户

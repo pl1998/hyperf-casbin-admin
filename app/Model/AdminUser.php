@@ -3,6 +3,7 @@
 declare (strict_types=1);
 namespace App\Model;
 
+use HyperfExt\Hashing\Hash;
 use Qbhy\HyperfAuth\AuthAbility;
 use Qbhy\HyperfAuth\Authenticatable;
 
@@ -31,4 +32,8 @@ class AdminUser extends Model implements Authenticatable
     const STATUS_YES=0; //正常
     const STATUS_NO=1;  // 禁用
 
+    public function getPassword($password)
+    {
+        return Hash::make($password);
+    }
 }

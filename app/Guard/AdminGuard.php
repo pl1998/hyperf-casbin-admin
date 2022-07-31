@@ -8,9 +8,7 @@
 
 namespace App\Guard;
 
-use Qbhy\HyperfAuth\AuthGuard;
 use Qbhy\HyperfAuth\AuthManager;
-use Qbhy\HyperfAuth\Exception\GuardException;
 
 class AdminGuard extends AuthManager
 {
