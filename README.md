@@ -9,6 +9,7 @@
 #### 复制配置文件并配置好mysql、redis信息
 ```shell
 cp .env.example .env
+composer install
 ```
 #### 执行初始化构建命令
 
